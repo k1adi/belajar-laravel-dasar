@@ -16,3 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('kiadi', function() {
+    return 'Rizki Adi Prisma';
+});
+
+Route::redirect('/rizki', '/kiadi');
+
+Route::fallback(function() {
+    return 'error 404, page not found';
+});
