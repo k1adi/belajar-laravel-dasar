@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Data\Bar;
 use App\Data\Foo;
 use App\Data\Person;
 use Tests\TestCase;
@@ -60,5 +61,35 @@ class ServiceContainerTest extends TestCase
         self::assertEquals("Rizki", $person1->firstname);
         self::assertEquals("Rizki", $person2->firstname);
         self::assertSame($person1, $person2);
+    }
+
+    public function test_instance()
+    {
+        $person = new Person("Rizki", "Adi");
+        $this->app->instance(Person::class, $person);
+
+        $person1 = $this->app->make(Person::class); // $person
+        $person2 = $this->app->make(Person::class); // $person
+
+        self::assertEquals("Rizki", $person1->firstname);
+        self::assertEquals("Rizki", $person2->firstname);
+        self::assertSame($person1, $person2);
+    }
+
+    public function test_dependency_injection()
+    {
+        $this->app->singleton(Foo::class, function($app) {
+            return new Foo();
+        });
+        $this->app->singleton(Bar::class, function($app) {
+            $foo = $app->make(Foo::class);
+            return new Bar($foo);
+        });
+
+        $foo = $this->app->make(Foo::class);
+        $bar1 = $this->app->make(Bar::class);
+        $bar2 = $this->app->make(Bar::class);
+
+        self::assertSame($bar1, $bar2);
     }
 }
