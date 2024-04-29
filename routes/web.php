@@ -17,6 +17,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::view('/halo', 'hello', ['name' => 'Rizki']);
+
+Route::get('/halo-lagi', function() {
+    return view('hello', ['name' => 'Rizki Adi']);
+});
+
+Route::get('/hello-world', function() {
+    return view('hello.world', ['name' => 'Hello']);
+});
+
 Route::get('kiadi', function() {
     return 'Rizki Adi Prisma';
 });
