@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HelloController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,13 +19,15 @@ Route::get('/', function () {
 });
 
 Route::view('/halo', 'hello', ['name' => 'Rizki']);
+Route::get('/controller/halo/{name}', [App\Http\Controllers\HelloController::class, 'index'])->name('controller.hello');
 
 Route::get('/halo-lagi', function() {
     return view('hello', ['name' => 'Rizki Adi']);
 });
+Route::get('/controller/halo-lagi', [App\Http\Controllers\HelloController::class, 'world'])->name('controller.world');
 
 Route::get('/hello-world', function() {
-    return view('hello.world', ['name' => 'Hello']);
+    return view('hello.world', ['name' => 'Rizki Adi']);
 });
 
 Route::get('kiadi', function() {
