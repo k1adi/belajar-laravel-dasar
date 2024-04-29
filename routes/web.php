@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HelloController;
+use App\Http\Controllers\InputController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,3 +41,10 @@ Route::redirect('/rizki', '/kiadi');
 Route::fallback(function() {
     return 'error 404, page not found';
 });
+
+Route::get('/input/hello', [InputController::class, 'hello']);
+Route::post('/input/hello', [InputController::class, 'hello']);
+Route::post('/input/hello/first', [InputController::class, 'firstName']);
+Route::post('/input/hello/json', [InputController::class, 'allInput']);
+Route::post('/input/hello/array', [InputController::class, 'helloArray']);
+Route::post('/input/type', [InputController::class, 'inputType']);
