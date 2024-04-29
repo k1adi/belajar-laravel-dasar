@@ -19,6 +19,7 @@ Route::get('/', function () {
 });
 
 Route::view('/halo', 'hello', ['name' => 'Rizki']);
+Route::get('/controller/halo/request', [App\Http\Controllers\HelloController::class, 'request'])->name('controller.request');
 Route::get('/controller/halo/{name}', [App\Http\Controllers\HelloController::class, 'index'])->name('controller.hello');
 
 Route::get('/halo-lagi', function() {
