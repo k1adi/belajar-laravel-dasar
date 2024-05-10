@@ -3,13 +3,12 @@
 use App\Http\Controllers\CookieController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\FormController;
-use App\Http\Controllers\HelloController;
 use App\Http\Controllers\InputController;
 use App\Http\Controllers\RedirectController;
 use App\Http\Controllers\ResponseController;
 use App\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Support\Facades\Route;
-use Tests\Feature\CookieControllerTest;
+use Illuminate\Support\Facades\URL;
 
 /*
 |--------------------------------------------------------------------------
@@ -115,3 +114,15 @@ Route::middleware(['contoh:Prisma,401'])->group(function() {
 
 Route::get('/form', [FormController::class, 'index']);
 Route::post('/form', [FormController::class, 'submitForm']);
+
+Route::get('/url/full', function() {
+    return URL::full();
+});
+Route::get('/url/named', function() {
+    return URL::route('controller.hello', ['name' => 'Rizki']);
+});
+Route::get('/url/action', function() {
+    return URL::action([FormController::class, 'index'], []);
+    // return action([FormController::class, 'index'], []);
+    // return url()->action([FormController::class, 'index'], []);
+});
